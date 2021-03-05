@@ -1,21 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
-import styled from "styled-components";
-import Header from "./Template/Header";
-import Footer from "./Template/Footer";
-import NavBar from "./Template/NavBar";
-function App() {
+import React from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "assets/styles/tailwind.css";
+import Admin from "layouts/Admin.js";
+import Auth from "layouts/Auth.js";
+import Landing from "views/Landing.js";
+import Profile from "views/Profile.js";
+
+function App () {
   return (
-    <>
-   <Header></Header>
-   <NavBar></NavBar>
-   <Footer></Footer>
-   </>
+    <BrowserRouter>
+    <Switch>
+      <Route path="/admin" component={Admin} />
+      <Route path="/auth" component={Auth} />
+      <Route path="/home" exact component={Landing} />
+      <Route path="/profile" exact component={Profile} />
+      <Redirect from="/" to="/home" />
+      <Redirect from="*" to="/" />
+    </Switch>
+  </BrowserRouter>
   );
 }
-const AppFrame = styled.div`
-text-align: center;
-display: flex;
-flex-direction: column;
-`;
+
 export default App;
